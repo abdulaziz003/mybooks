@@ -8,9 +8,13 @@ const express = require('express');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
 
+// import body-parser to read posted data
+const bodyParser = require('body-parser');
+
 
 // Importing Routes
 const indexRouter = require('./routes/index');
+const authorRouter = require('./routes/authors');
 
 // Setting the view engine
 app.set('view engine', 'ejs');
@@ -22,6 +26,8 @@ app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 // Setting the location for static files e.g.(css, js, images)
 app.use(express.static('public'));
+// User body-parser with express
+app.use(bodyParser.urlencoded({limit: '10mb', extended: false}));
 
 // Import mongoose to the application
 const mongoose = require('mongoose');
@@ -34,8 +40,9 @@ db.once('open', () => console.log('connected to mongoDB :) '));
 
 
 
-// Use the indexRouter
+// Use the imported Router
 app.use('/', indexRouter);
+app.use('/authors', authorRouter);
 
 
 
