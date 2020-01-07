@@ -15,6 +15,7 @@ const bodyParser = require('body-parser');
 // Importing Routes
 const indexRouter = require('./routes/index');
 const authorRouter = require('./routes/authors');
+const bookRouter = require('./routes/books');
 
 // Setting the view engine
 app.set('view engine', 'ejs');
@@ -43,6 +44,7 @@ db.once('open', () => console.log('connected to mongoDB :) '));
 // Use the imported Router
 app.use('/', indexRouter);
 app.use('/authors', authorRouter);
+app.use('/books', bookRouter);
 
 
 
