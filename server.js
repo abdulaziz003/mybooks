@@ -7,6 +7,7 @@ if(process.env.NODE_ENV !== 'production'){
 const express = require('express');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
+const methodOverride = require('method-override');
 
 // import body-parser to read posted data
 const bodyParser = require('body-parser');
@@ -25,6 +26,8 @@ app.set('views', __dirname+'/views');
 app.set('layout', 'layouts/layout');
 // using the express-ejs-layouts
 app.use(expressLayouts);
+// using method-override to send request to the server like 'delete' and 'put'
+app.use(methodOverride('_method'));
 // Setting the location for static files e.g.(css, js, images)
 app.use(express.static('public'));
 // User body-parser with express
